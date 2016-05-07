@@ -1,0 +1,35 @@
+*.war
+*.ear
+*.class
+*.7z
+*.zip
+*.itxp
+
+conf/resource.properties
+
+# eclipse specific git ignore
+*.pydevproject
+# .project
+.metadata
+license/
+bin/
+tmp/
+gen/**
+*.tmp
+*.bak
+*.swp
+*.pyc
+*~.nib
+~*
+local.properties
+# .classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+us.stackdump

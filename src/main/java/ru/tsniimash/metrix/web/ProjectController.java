@@ -53,7 +53,6 @@ public class ProjectController
 		model.addAttribute("projectForm", project);
 		model.addAttribute("projects",projectService.getProjectsForUser(user));
 		model.addAttribute("userid",userid);
-		logger.log(Level.INFO, "projects get");
 		return "projects";
 	}
 	
@@ -61,6 +60,7 @@ public class ProjectController
 	public String addProject(Model model, @PathVariable("userid") long userid, @ModelAttribute("projectForm") @Validated Project project, BindingResult bindingResult, final RedirectAttributes redirectAttributes)
 	{
 		model.addAttribute("userid",userid);
+		logger.log(Level.INFO, project.getId());
 		if (bindingResult.hasErrors())
 		{
 			model.addAttribute("projects",projectService.getProjectsForUser(userService.findById(userid)));
@@ -75,7 +75,7 @@ public class ProjectController
 	}
 	
 	@RequestMapping(value = "/projects/{userid}/{projectid}/update", method = RequestMethod.GET)
-	public String updateProject(Model model, @PathVariable("userid") long userid, @PathVariable("projectid") long projectid)
+	public String updateProjectForm(Model model, @PathVariable("userid") long userid, @PathVariable("projectid") long projectid)
 	{
 		Project project = projectService.getProject(projectid);
 		model.addAttribute("userid",userid);
@@ -83,5 +83,27 @@ public class ProjectController
 		model.addAttribute("projects",projectService.getProjectsForUser(userService.findById(userid)));
 		return "projects";
 		
+	}
+	
+	@RequestMapping(value = "/projects/{userid}/{projectid}/update", method = RequestMethod.POST)
+	public String updateProject(Model model, @PathVariable("userid") long userid, @PathVariable("projectid") long projectid, @ModelAttribute("projectForm") Project project, BindingResult bindingResult, final RedirectAttributes redirectAttributes)
+	{
+		Project projectToUpdate = projectService.getProject(projectid);
+		projectToUpdate.setModified(new Date());
+		projectToUpdate.setName(project.getName());
+		projectService.updateProject(projectToUpdate);
+		redirectAttributes.addFlashAttribute("css","success");
+		redirectAttributes.addFlashAttribute("msg","Проект успешно обновлён.");
+		return "redirect:/projects/"+userid;
+		
+	}
+	
+	@RequestMapping(value = "/projects/{userid}/{projectid}/delete", method = RequestMethod.POST)
+	public String deleteProject(@PathVariable("userid") long userid, @PathVariable("projectid") long projectid,final RedirectAttributes redirectAttributes)
+	{
+		projectService.deleteProject(projectid);
+		redirectAttributes.addFlashAttribute("css","success");
+		redirectAttributes.addFlashAttribute("msg","Проект успешно удалён.");
+		return "redirect:/projects/"+userid;
 	}
 }  

@@ -2,6 +2,7 @@ package ru.tsniimash.metrix.validation;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -13,6 +14,8 @@ import ru.tsniimash.metrix.service.ProjectService;
 @Component
 public class ProjectValidator implements Validator
 {
+	private final Logger logger = Logger.getLogger(ProjectValidator.class);
+	
 	@Resource
 	private ProjectService projectService;
 

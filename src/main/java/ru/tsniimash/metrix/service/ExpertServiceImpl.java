@@ -39,5 +39,18 @@ public class ExpertServiceImpl implements ExpertService
 	{
 		expertDao.deleteExpert(id);
 	}
+
+	@Override
+	public void updateExpert(Expert expert)
+	{
+		
+		expertDao.updateExpert(expert);
+	}
+
+	@Override
+	public Expert getExpertByEmail(String email)
+	{
+		return expertDao.getExpertByEmail(email);
+	}
 	
 }

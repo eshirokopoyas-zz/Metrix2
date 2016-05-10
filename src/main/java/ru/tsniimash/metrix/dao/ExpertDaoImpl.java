@@ -123,4 +123,59 @@ public class ExpertDaoImpl implements ExpertDao
 		}
 		
 	}
+
+	@Override
+	public void updateExpert(Expert expert)
+	{
+		Session session = null;
+		Transaction transaction = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(expert);
+			transaction.commit();
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.ERROR, e);
+		}
+		finally
+		{
+			if (transaction!=null)
+			{
+				transaction.rollback();
+			}
+			if (session!=null)
+			{
+				session.close();
+			}
+		}
+		
+	}
+
+	@Override
+	public Expert getExpertByEmail(String email)
+	{
+		Expert expert = null;
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			expert = session.bySimpleNaturalId(Expert.class).getReference(email);
+			
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.ERROR, e);
+		}
+		finally
+		{
+			if (session!=null)
+			{
+				session.close();
+			}
+		}
+		return expert;
+	}
 }

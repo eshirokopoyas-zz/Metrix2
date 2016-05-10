@@ -46,4 +46,10 @@ public class ProjectServiceImpl implements ProjectService
 		return projectDao.getProjectByProjectId(project_id);
 	}
 
+	@Override
+	public void updateProject(Project project)
+	{
+		projectDao.updateProject(project);
+	}
+
 }

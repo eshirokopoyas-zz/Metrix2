@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "EXPERT")
@@ -27,9 +30,11 @@ public class Expert implements Serializable
 	@Column(name = "NAME")
 	private String name;
 	
-	@Column(name = "EMAIL")
+	@NaturalId
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 	
+	@ManyToOne
 	@JoinColumn(name = "USER_FK", nullable = false)
 	private User user;
 	
@@ -79,5 +84,10 @@ public class Expert implements Serializable
 
 	public void setModified(Date modified) {
 		this.modified = modified;
+	}
+
+	public long getId()
+	{
+		return id;
 	}
 }

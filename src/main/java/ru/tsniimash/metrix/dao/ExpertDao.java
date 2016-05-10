@@ -9,9 +9,13 @@ public interface ExpertDao
 {
 	public void addExpert(Expert expert);
 	
+	public void updateExpert(Expert expert);
+	
 	public List<Expert> getExpertsForUser(User user);
 	
 	public Expert getExpert(long id);
+	
+	public Expert getExpertByEmail(String email);
 	
 	public void deleteExpert(long id);
 }

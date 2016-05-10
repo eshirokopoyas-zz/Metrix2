@@ -9,6 +9,8 @@ public interface ProjectDao
 {
 	public void addProject(Project project);
 	
+	public void updateProject(Project project);
+	
 	public List<Project> getProjectsForUser(User user);
 	
 	public Project getProject(long id);

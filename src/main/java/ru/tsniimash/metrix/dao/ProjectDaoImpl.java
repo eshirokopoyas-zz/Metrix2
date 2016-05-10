@@ -149,4 +149,33 @@ public class ProjectDaoImpl implements ProjectDao
 		}
 		return project;
 	}
+
+	@Override
+	public void updateProject(Project project)
+	{
+		Session session = null;
+		Transaction transaction = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(project);
+			transaction.commit();
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.ERROR, e);
+		}
+		finally
+		{
+			if (transaction!=null)
+			{
+				transaction.rollback();
+			}
+			if (session!=null)
+			{
+				session.close();
+			}
+		}
+	}
 }

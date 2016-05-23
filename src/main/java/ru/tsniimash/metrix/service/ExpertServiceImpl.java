@@ -52,5 +52,11 @@ public class ExpertServiceImpl implements ExpertService
 	{
 		return expertDao.getExpertByEmail(email);
 	}
+
+	@Override
+	public int getExpertCountForUser(User user)
+	{
+		return expertDao.getExpertCountForUser(user);
+	}
 	
 }

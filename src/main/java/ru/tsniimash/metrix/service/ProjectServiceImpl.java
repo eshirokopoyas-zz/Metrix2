@@ -52,4 +52,10 @@ public class ProjectServiceImpl implements ProjectService
 		projectDao.updateProject(project);
 	}
 
+	@Override
+	public int getProjectCountForUser(User user)
+	{
+		return projectDao.getProjectCountForUser(user);
+	}
+
 }

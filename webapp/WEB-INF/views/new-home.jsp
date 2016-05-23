@@ -31,36 +31,36 @@
 <div class="col-md-4">
 <div class="thumbnail">
 <a href="http://getbootstrap.com/">
-<img src="<%=request.getContextPath()%>/resources/images/bootstrap.png">
+<img class="compact" src="<%=request.getContextPath()%>/resources/images/bootstrap.png">
 </a>
 </div>
 <div class="thumbnail">
 <a href="http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html">
-<img src="<%=request.getContextPath()%>/resources/images/Spring-MVC.png">
+<img class="compact" src="<%=request.getContextPath()%>/resources/images/Spring-MVC.png">
 </a>
 </div>
 </div>
 <div class="col-md-4">
 <div class="thumbnail">
 <a href="http://hibernate.org/">
-<img src="<%=request.getContextPath()%>/resources/images/hibernate.png">
+<img class="compact" src="<%=request.getContextPath()%>/resources/images/hibernate.png">
 </a>
 </div>
 <div class="thumbnail">
 <a href="http://www.oracle.com/technetwork/java/javaee/jsp/index.html">
-<img src="<%=request.getContextPath()%>/resources/images/jsp.png">
+<img class="compact" src="<%=request.getContextPath()%>/resources/images/jsp.png">
 </a>
 </div>
 </div> 
 <div class="col-md-4">
 <div class="thumbnail">
 <a href="http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html">
-<img src="<%=request.getContextPath()%>/resources/images/jpa.png">
+<img class="compact" src="<%=request.getContextPath()%>/resources/images/jpa.png">
 </a>
 </div>
 <div class="thumbnail">
 <a href="https://jquery.com/">
-<img src="<%=request.getContextPath()%>/resources/images/JQuery.png">
+<img class="compact" src="<%=request.getContextPath()%>/resources/images/JQuery.png">
 </a>
 </div>
 </div>

@@ -13,6 +13,8 @@ public interface ProjectDao
 	
 	public List<Project> getProjectsForUser(User user);
 	
+	public int getProjectCountForUser(User user);
+	
 	public Project getProject(long id);
 	
 	public Project getProjectByProjectId(String project_id);

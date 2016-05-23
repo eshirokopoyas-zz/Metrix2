@@ -13,6 +13,8 @@ public interface ExpertService
 	
 	public List<Expert> getExpertsForUser(User user);
 	
+	public int getExpertCountForUser(User user);
+	
 	public Expert getExpert(long id);
 	
 	public Expert getExpertByEmail(String email);

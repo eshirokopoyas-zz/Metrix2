@@ -11,19 +11,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import ru.tsniimash.metrix.model.Expert;
+import ru.tsniimash.metrix.model.Criterion;
 import ru.tsniimash.metrix.model.User;
 
 @Repository
-public class ExpertDaoImpl implements ExpertDao
+public class CriterionDaoImpl implements CriterionDao
 {
-	private final Logger logger = Logger.getLogger(ExpertDaoImpl.class);
-	
+	private final Logger logger = Logger.getLogger(CriterionDaoImpl.class);
+
 	@Resource
 	private SessionFactory sessionFactory;
-
+	
 	@Override
-	public void addExpert(Expert expert)
+	public void addCriterion(Criterion criterion)
 	{
 		Session session = null;
 		Transaction transaction = null;
@@ -31,7 +31,36 @@ public class ExpertDaoImpl implements ExpertDao
 		{
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			session.save(expert);
+			session.save(criterion);
+			transaction.commit();
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.ERROR, e);
+		}
+		finally
+		{
+			if (transaction!=null)
+			{
+				transaction.rollback();
+			}
+			if (session!=null)
+			{
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public void updateCriterion(Criterion criterion)
+	{
+		Session session = null;
+		Transaction transaction = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(criterion);
 			transaction.commit();
 		}
 		catch (Exception e)
@@ -53,14 +82,14 @@ public class ExpertDaoImpl implements ExpertDao
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Expert> getExpertsForUser(User user)
+	public List<Criterion> getCriteriaForUser(User user)
 	{
-		List<Expert> experts = null;
+		List<Criterion> criteria = null;
 		Session session = null;
 		try
 		{
 			session = sessionFactory.openSession();
-			experts = session.createQuery("from Expert where user = :user").setLong("user", user.getId()).list();
+			criteria = session.createQuery("from Criterion where user = :user").setLong("user", user.getId()).list();
 		}
 		catch (Exception e)
 		{
@@ -73,18 +102,18 @@ public class ExpertDaoImpl implements ExpertDao
 				session.close();
 			}
 		}
-		return experts;
+		return criteria;
 	}
 
 	@Override
-	public Expert getExpert(long id)
+	public Criterion getCriterion(long id)
 	{
-		Expert expert = null;
+		Criterion criterion = null;
 		Session session = null;
 		try
 		{
 			session = sessionFactory.openSession();
-			expert = session.byId(Expert.class).getReference(id);
+			criterion = session.byId(Criterion.class).getReference(id);
 			
 		}
 		catch (Exception e)
@@ -98,17 +127,42 @@ public class ExpertDaoImpl implements ExpertDao
 				session.close();
 			}
 		}
-		return expert;
+		return criterion;
 	}
 
 	@Override
-	public void deleteExpert(long id)
+	public Criterion getCriterionById(String criterionId)
+	{
+		Criterion criterion = null;
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			criterion = session.bySimpleNaturalId(Criterion.class).getReference(criterionId);
+			
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.ERROR, e);
+		}
+		finally
+		{
+			if (session!=null)
+			{
+				session.close();
+			}
+		}
+		return criterion;
+	}
+
+	@Override
+	public void deleteCriterion(long id)
 	{
 		Session session = null;
 		try
 		{
 			session = sessionFactory.openSession();
-			session.delete(session.get(Expert.class, id));
+			session.delete(session.get(Criterion.class, id));
 		}
 		catch (Exception e)
 		{
@@ -122,73 +176,17 @@ public class ExpertDaoImpl implements ExpertDao
 				session.close();
 			}
 		}
-		
 	}
 
 	@Override
-	public void updateExpert(Expert expert)
-	{
-		Session session = null;
-		Transaction transaction = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.update(expert);
-			transaction.commit();
-		}
-		catch (Exception e)
-		{
-			logger.log(Level.ERROR, e);
-		}
-		finally
-		{
-			if (transaction!=null)
-			{
-				transaction.rollback();
-			}
-			if (session!=null)
-			{
-				session.close();
-			}
-		}
-		
-	}
-
-	@Override
-	public Expert getExpertByEmail(String email)
-	{
-		Expert expert = null;
-		Session session = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			expert = session.bySimpleNaturalId(Expert.class).getReference(email);
-			
-		}
-		catch (Exception e)
-		{
-			logger.log(Level.ERROR, e);
-		}
-		finally
-		{
-			if (session!=null)
-			{
-				session.close();
-			}
-		}
-		return expert;
-	}
-
-	@Override
-	public int getExpertCountForUser(User user)
+	public int getCriterionCountForUser(User user)
 	{
 		int count = 0;
 		Session session = null;
 		try
 		{
 			session = sessionFactory.openSession();
-			count = Long.class.cast(session.createQuery("select count(*) from Expert where user = :user").setLong("user", user.getId()).uniqueResult()).intValue();
+			count = Long.class.cast(session.createQuery("select count(*) from Criterion where user = :user").setLong("user", user.getId()).uniqueResult()).intValue();
 		}
 		catch (Exception e)
 		{

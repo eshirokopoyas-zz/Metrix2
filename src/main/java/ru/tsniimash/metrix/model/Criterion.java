@@ -17,11 +17,11 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "PROJECT")
-public class Project implements Serializable
+@Table(name = "CRITERIA")
+public class Criterion implements Serializable
 {
-	private static final long serialVersionUID = 3707446483482872912L;
-	
+	private static final long serialVersionUID = -2467214736463334420L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID",nullable=false)
@@ -31,13 +31,13 @@ public class Project implements Serializable
 	private String name;
 	
 	@NaturalId
-	@Column(name = "PROJECT_ID", nullable = false)
-	private String project_id;
+	@Column(name = "CRITERION_ID", nullable = false)
+	private String criterion_id;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_FK", nullable = false)
+	@JoinColumn(name = "USER_FK", nullable = false)
 	private User user;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATED",nullable=false)
 	private Date created;
@@ -45,7 +45,7 @@ public class Project implements Serializable
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "MODIFIED")
 	private Date modified;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -54,12 +54,12 @@ public class Project implements Serializable
 		this.name = name;
 	}
 
-	public String getProject_id() {
-		return project_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setProject_id(String project_id) {
-		this.project_id = project_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getCreated() {
@@ -78,23 +78,18 @@ public class Project implements Serializable
 		this.modified = modified;
 	}
 
-	public User getUser()
-	{
-		return user;
-	}
-
-	public void setUser(User user)
-	{
-		this.user = user;
-	}
-
 	public long getId()
 	{
 		return id;
 	}
 
-	public void setId(long id)
+	public String getCriterion_id()
 	{
-		this.id = id;
+		return criterion_id;
+	}
+
+	public void setCriterion_id(String criterion_id)
+	{
+		this.criterion_id = criterion_id;
 	}
 }

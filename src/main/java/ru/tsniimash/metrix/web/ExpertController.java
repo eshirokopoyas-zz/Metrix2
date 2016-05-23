@@ -93,6 +93,14 @@ public class ExpertController
 		redirectAttributes.addFlashAttribute("css","success");
 		redirectAttributes.addFlashAttribute("msg","Эксперт успешно обновлён.");
 		return "redirect:/experts/"+userid;
-		
+	}
+	
+	@RequestMapping(value = "/experts/{userid}/{expertid}/delete", method = RequestMethod.POST)
+	public String deleteProject(@PathVariable("userid") long userid, @PathVariable("expertid") long expertid,final RedirectAttributes redirectAttributes)
+	{
+		expertService.deleteExpert(expertid);
+		redirectAttributes.addFlashAttribute("css","success");
+		redirectAttributes.addFlashAttribute("msg","Эксперт успешно удалён.");
+		return "redirect:/experts/"+userid;
 	}
 }  

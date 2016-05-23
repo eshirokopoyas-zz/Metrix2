@@ -38,9 +38,16 @@
 		</spring:bind>
 		
 		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-2">
+		<table class="table">
+			<tr>
+				<td align="left">
 				<button type="submit" class="btn-lg btn-primary pull-right">${expertForm.id>0?'Сохранить':'Добавить'}</button>
-			</div>
+				</td>
+				<td align="right">
+				<button type="reset"  onclick="location.href='/first/${userid}'" class="btn-lg btn-danger pull-right">Вернуться</button>
+				</td>
+			</tr>
+		</table>
 		</div>
 	</form:form>
 	

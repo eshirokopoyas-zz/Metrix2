@@ -8,22 +8,45 @@
 </script>
 </head>
 <jsp:include page="../fragments/header.jsp"></jsp:include>
-<body class="dynamic">
+<body>
 <div class="jumbotron">
 <div class="container">
 <h1>Алгоритм "Кластеризация". Шаг 1.</h1>
- 
-    <INPUT class="table" type="button" value="Добавить эксперта" onclick="addRow('dataTable')" />
- 
-    <INPUT class="table" type="button" value="Удалить эксперта" onclick="deleteRow('dataTable')" />
- 
-    <TABLE class="table table-inverse" id="dataTable" border="1">
-        <TR>
-            <TD><INPUT type="checkbox" name="chk"/></TD>
-            <TD> 1 </TD>
-            <TD> <INPUT type="text" /> </TD>
-        </TR>
-    </TABLE>
+<table class="table">
+<tr>
+<td align="center">
+Настройка системы
+</td>
+<td align="center">
+<button class="btn btn-primary" onclick="location.href='/projects/${userid}'">УПРАВЛЕНИЕ ПРОЕКТАМИ</button>
+</td>
+<td align="center">
+<button class="btn btn-primary" onclick="location.href='/experts/${userid}'">УПРАВЛЕНИЕ ЭКСПЕРТАМИ</button>
+</td>
+<td align="center">
+<button class="btn btn-primary" onclick="location.href='/criteria/${userid}'">УПРАВЛЕНИЕ КРИТЕРИЯМИ</button>
+</td>
+</tr>
+<tr>
+<td align="center">
+Количество
+</td>
+<td align="center">
+${projects_count}
+</td>
+<td align="center">
+${experts_count}
+</td>
+<td align="center">
+${criteria_count}
+</td>
+</tr>
+<tr>
+<td colspan="4" align="right">
+<button title="Количество элментов не должно быть равно нулю. Продолжите настройку." class="btn btn-primary" onclick="location.href='/second/${userid}'" ${projects_count*experts_count*criteria_count>0?'':'disabled'} >Далее</button>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </body>

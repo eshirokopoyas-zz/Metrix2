@@ -81,6 +81,17 @@ public class WebController
 			return "redirect:/login";
 	}
 	
+	private void populateDefaultModel(Model model)
+	{
+		Map<String, String> country = new LinkedHashMap<String, String>();
+		country.put("RU", "Россия");
+		country.put("CN", "Китай");
+		country.put("SG", "Сингапур");
+		country.put("US", "Соединённые Штаты");
+		model.addAttribute("countryList", country);
+
+	}
+	
 	// TEST
 	
 	@RequestMapping(value = {"/test"}, method = RequestMethod.GET)
@@ -115,16 +126,5 @@ public class WebController
 			userService.save(user);
 		}
 			return "redirect:/";
-	}
-	
-	private void populateDefaultModel(Model model)
-	{
-		Map<String, String> country = new LinkedHashMap<String, String>();
-		country.put("RU", "Россия");
-		country.put("CN", "Китай");
-		country.put("SG", "Сингапур");
-		country.put("US", "Соединённые Штаты");
-		model.addAttribute("countryList", country);
-
 	}
 }

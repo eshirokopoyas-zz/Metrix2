@@ -119,10 +119,10 @@ public class ProjectDaoImpl implements ProjectDao
 		{
 			if (session!=null)
 			{
+				session.flush();
 				session.close();
 			}
 		}
-		
 	}
 
 	@Override
@@ -177,5 +177,29 @@ public class ProjectDaoImpl implements ProjectDao
 				session.close();
 			}
 		}
+	}
+
+	@Override
+	public int getProjectCountForUser(User user)
+	{
+		int count = 0;
+		Session session = null;
+		try
+		{
+			session = sessionFactory.openSession();
+			count = Long.class.cast(session.createQuery("select count(*) from Project where user = :user").setLong("user", user.getId()).uniqueResult()).intValue();
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.ERROR, e);
+		}
+		finally
+		{
+			if (session!=null)
+			{
+				session.close();
+			}
+		}
+		return count;
 	}
 }

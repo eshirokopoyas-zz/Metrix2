@@ -57,4 +57,11 @@ public class CriterionServiceImpl implements CriterionService
 	{
 		return criterionDao.getCriterionCountForUser(user);
 	}
+	
+	@Override
+	public String getDisplayName(Criterion criterion)
+	{
+		return criterion.getCriterion_id()+" ("+criterion.getName()+")";
+		
+	}
 }

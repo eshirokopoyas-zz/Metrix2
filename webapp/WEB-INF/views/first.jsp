@@ -11,7 +11,14 @@
 <body>
 <div class="jumbotron">
 <div class="container">
-<h1>Алгоритм "Кластеризация". Шаг 1.</h1>
+<div class="system">
+<h1>Алгоритм "Кластеризация". Шаг 1. Настройка системы.</h1>
+Необходимо осуществить настройку системы:
+<ol>
+<li>Указать не менее одного эксперта.</li>
+<li>Указать не менее одного проекта для оценки.</li>
+<li>Указать не менее одного критерия оценки.</li>
+</ol>
 <table class="table">
 <tr>
 <td align="center">
@@ -43,10 +50,11 @@ ${criteria_count}
 </tr>
 <tr>
 <td colspan="4" align="right">
-<button title="Количество элментов не должно быть равно нулю. Продолжите настройку." class="btn btn-primary" onclick="location.href='/second/${userid}'" ${projects_count*experts_count*criteria_count>0?'':'disabled'} >Далее</button>
+<button title="Количество элментов не должно быть равно нулю. Продолжите настройку." class="btn btn-primary" onclick="location.href='/second2/${userid}'" ${projects_count*experts_count*criteria_count>0?'':'disabled'} >Далее</button>
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </body>

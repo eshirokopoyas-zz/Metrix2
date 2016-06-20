@@ -12,36 +12,52 @@
 <div class="jumbotron">
 <div class="container">
 <div class="system">
-<h1>Алгоритм "Кластеризация". Шаг 3. Результат групповой оценки.</h1>
-<table class="table">
+<h1>Алгоритм "Кластеризация". Шаг 3. Кластеры проектов.</h1>
+<table>
 <thead>
+</thead>
+<tbody>
 <tr>
-<th></th>
-<th></th>
+<td>
+<img src="/charts/pie/1"/>
+</td>
+<td>
+<img src="/charts/pie/2"/>
+</td>
 </tr>
 <tr>
+<td>
+<table>
+<thead>
 </thead>
-<c:forEach var="groupGrade" items="${groupGrades}">
+<tbody>
+<c:forEach var="projectModule" items="${cluster1}">
 <tr>
 <td>
-${groupGrade.project.project_id} (${groupGrade.project.name})
-</td>
-<td>
-${groupGrade.criterion.criterion_id} (${groupGrade.criterion.name})
-</td>
-<td>
-${groupGrade.grade}
+${projectModule.project.project_id} (${projectModule.project.name})
 </td>
 </tr>
 </c:forEach>
-<tr>
-<td colspan="3" align="left">
-<button class="btn btn-primary" onclick="location.href='/second2/${userid}'">Вернуться</button>
+</tbody>
+</table>
 </td>
-<td colspan="3" align="right">
-<button class="btn btn-primary" onclick="location.href='/fourth/${userid}'">Далее</button>
+<td>
+<table>
+<thead>
+</thead>
+<tbody>
+<c:forEach var="projectModule" items="${cluster2}">
+<tr>
+<td>
+${projectModule.project.project_id} (${projectModule.project.name})
 </td>
 </tr>
+</c:forEach>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>

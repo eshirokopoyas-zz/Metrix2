@@ -20,4 +20,6 @@ public interface CriterionService
 	public Criterion getCriterionById(String criterionId);
 	
 	public void deleteCriterion(long id);
+	
+	public String getDisplayName(Criterion criterion);
 }

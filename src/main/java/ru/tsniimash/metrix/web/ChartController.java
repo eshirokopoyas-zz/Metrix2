@@ -1,5 +1,8 @@
 package ru.tsniimash.metrix.web;
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Level;
@@ -12,8 +15,12 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import ru.tsniimash.metrix.pojo.ProjectVectorModule;
+import ru.tsniimash.metrix.service.GraphDataLoader;
 
 @Controller
 @RequestMapping("/charts")
@@ -21,13 +28,17 @@ public class ChartController
 {
 	private final Logger logger = Logger.getLogger(ChartController.class);
 	
-	@RequestMapping(value="/testpie", method = RequestMethod.GET)
-	public void drawPieChart(HttpServletResponse httpServletResponse)
+	@Resource
+	private GraphDataLoader graphDataLoader;
+	
+	@RequestMapping(value="/pie/{num}", method = RequestMethod.GET)
+	public void drawPieChart(HttpServletResponse httpServletResponse, @PathVariable ("num") int clusterNum)
 	{
 		httpServletResponse.setContentType("image/png");
-		PieDataset dataset = createDataset();
+		PieDataset dataset = createDataset(clusterNum);
 		
-		JFreeChart chart = createChart(dataset, "Test Pie");
+		String label = clusterNum==1?"Первоприоритетные проекты":"Второстепенные проекты";
+		JFreeChart chart = createChart(dataset, label);
 		
 		try
 		{
@@ -40,13 +51,12 @@ public class ChartController
 		}
 	}
 	
-	private PieDataset createDataset()
+	private PieDataset createDataset(int clusterNum)
 	{
+		List<ProjectVectorModule> cluster = clusterNum==1?graphDataLoader.getProjectClusters().getCluster1():graphDataLoader.getProjectClusters().getCluster2();
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("Mac", 21);
-		dataset.setValue("Linux", 30);
-		dataset.setValue("Window", 40);
-		dataset.setValue("Others", 9);
+		
+		cluster.stream().forEach(x -> dataset.setValue(x.getProject().getProject_id()+" ("+x.getProject().getName()+")", x.getGradeMod()));
 		return dataset;
 	}
 	

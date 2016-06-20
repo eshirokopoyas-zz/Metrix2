@@ -26,6 +26,7 @@ import ru.tsniimash.metrix.validation.ExpertValidator;
 @Controller
 public class ExpertController
 {
+	@SuppressWarnings("unused")
 	private final Logger logger = Logger.getLogger(ExpertController.class);
 	
 	@Resource

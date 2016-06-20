@@ -43,7 +43,7 @@ public class WebController
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String main(Model model)
 	{
-		return "redirect:/metrix";
+		return "new-home";
 	}
 	
 	@RequestMapping(value = {"/metrix"}, method = RequestMethod.GET)

@@ -2,17 +2,14 @@ package ru.tsniimash.metrix.test;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
-
-import ru.tsniimash.metrix.model.User;
 
 @Component
 public class DatabaseInitializingBean implements InitializingBean
 {
+	@SuppressWarnings("unused")
 	private final String TEST = "TEST";
 	
 	@Resource

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "GRADE")
@@ -45,6 +46,9 @@ public class Grade
 	@ManyToOne
 	@JoinColumn(name = "CRITERION_FK", nullable = false)
 	private Criterion criterion;
+	
+	@Transient
+	private String criterionIdString;
 
 	public Date getCreated()
 	{
@@ -109,5 +113,15 @@ public class Grade
 	public long getId()
 	{
 		return id;
+	}
+
+	public String getCriterionIdString()
+	{
+		return criterionIdString;
+	}
+
+	public void setCriterionIdString(String criterionIdString)
+	{
+		this.criterionIdString = criterionIdString;
 	}
 }

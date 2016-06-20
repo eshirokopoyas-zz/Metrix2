@@ -14,6 +14,7 @@ import ru.tsniimash.metrix.service.CriterionService;
 @Component
 public class CriterionValidator implements Validator
 {
+	@SuppressWarnings("unused")
 	private final Logger logger = Logger.getLogger(CriterionValidator.class);
 	
 	@Resource

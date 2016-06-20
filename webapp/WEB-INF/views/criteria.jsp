@@ -71,8 +71,8 @@
 					<td>${criterion.name}</td>
 					<td>${criterion.created}</td>
 					<td>
-						<spring:url value="/criteria/${userid}/${project.id}/delete" var="deleteUrl" /> 
-						<spring:url value="/criteria/${userid}/${project.id}/update" var="updateUrl" />
+						<spring:url value="/criteria/${userid}/${criterion.id}/delete" var="deleteUrl" /> 
+						<spring:url value="/criteria/${userid}/${criterion.id}/update" var="updateUrl" />
 
 						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Редактировать</button>
 						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Удалить</button></td>

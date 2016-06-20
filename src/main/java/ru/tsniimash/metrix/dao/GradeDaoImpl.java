@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.springframework.stereotype.Repository;
 
 import ru.tsniimash.metrix.model.Expert;
@@ -132,10 +133,13 @@ public class GradeDaoImpl implements GradeDao
 	public void deleteGrade(long id)
 	{
 		Session session = null;
+		Transaction transaction = null;
 		try
 		{
 			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			session.delete(session.get(Grade.class, id));
+			transaction.commit();
 		}
 		catch (Exception e)
 		{
@@ -143,9 +147,12 @@ public class GradeDaoImpl implements GradeDao
 		}
 		finally
 		{
+			if (transaction!=null&&transaction.getStatus()==TransactionStatus.ACTIVE)
+			{
+				transaction.rollback();
+			}
 			if (session!=null)
 			{
-				session.flush();
 				session.close();
 			}
 		}

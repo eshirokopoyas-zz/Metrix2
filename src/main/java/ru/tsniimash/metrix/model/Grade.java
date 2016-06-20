@@ -15,6 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "GRADE")
 public class Grade
@@ -32,18 +35,22 @@ public class Grade
 	private BigDecimal grade;
 	
 	@ManyToOne
+	@Cascade(CascadeType.DELETE)
 	@JoinColumn(name = "USER_FK", nullable = false)
 	private User user;
 	
 	@ManyToOne
+	@Cascade(CascadeType.DELETE)
 	@JoinColumn(name = "EXPERT_FK", nullable = false)
 	private Expert expert;
 	
 	@ManyToOne
+	@Cascade(CascadeType.DELETE)
 	@JoinColumn(name = "PROJECT_FK", nullable = false)
 	private Project project;
 	
 	@ManyToOne
+	@Cascade(CascadeType.DELETE)
 	@JoinColumn(name = "CRITERION_FK", nullable = false)
 	private Criterion criterion;
 	
